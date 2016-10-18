@@ -9,7 +9,7 @@ This project is a sample Visual Studio 2015 solution utilizing Azure Mobile apps
 ##Screenshots
 
 ###Native Android App
-![Native Android App](https://raw.github.com/hyprsoftcorp/hyprsoftprojectsdemo/master/images/android.png "Native Android App")
+![Native Android App](/images/android.png "Native Android App")
 
 ###Windows Console App
-![Windows Console App](https://raw.github.com/hyprsoftcorp/hyprsoftprojectsdemo/master/images/console.png "Windows Console App")
+![Windows Console App](/images/console.png "Windows Console App")
