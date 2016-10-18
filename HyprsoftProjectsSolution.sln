@@ -19,9 +19,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{61DA3060-BA15-4DE3-8079-4BA6BB65A398}"
 	ProjectSection(SolutionItems) = preProject
 		Images\android.jpg = Images\android.jpg
-		Images\android.png = Images\android.png
 		Images\console.jpg = Images\console.jpg
-		Images\console.png = Images\console.png
 	EndProjectSection
 EndProject
 Global
