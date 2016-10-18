@@ -1,5 +1,5 @@
 #Hyprsoft Projects Demo
-This project is a sample Visual Studio 2015 solution utilizing Azure Mobile apps, AAD authentication, a console app, and a native Android app built with Xamarin.  The solution contains 4 projects.
+A sample Visual Studio 2015 solution utilizing Azure Mobile Apps, AAD authentication, SignalR, a Windows console app, and a native Android app build using Xamarin.  The solution contains 4 projects.
 
 1. **HyprsoftProjectsAndroidApp** - A native Android 6.0 app using Azure Active Directory Authentication to authenticate with the mobile service backend which populates a RecyclerView with projects using the Azure Mobile App Client.  Projects are kept in sync with the mobile service backend using SignalR.
 2. **HyprsoftProjectsCommon** - A Portable Class Library (PCL) for shared code.

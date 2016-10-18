@@ -23,10 +23,12 @@ namespace HyprsoftProjectsAndroidApp
     {
         #region Fields
 
-        private MobileServiceClient _client = null;
-        private ProjectsAdapter _adapter;
-        private List<Project> _projects;
+        private bool _isLoading;
+        private MobileServiceClient _mobileServiceClient = null;
+        private ProjectsAdapter _projectsAdapter;
+        private List<Project> _projectsDataSource;
         private IHubProxy _hubProxy;
+        ProgressBar _progressBar;
 
         #endregion
 
@@ -38,17 +40,17 @@ namespace HyprsoftProjectsAndroidApp
 
             SetContentView(Resource.Layout.Main);
 
-            var toolbar = FindViewById<Toolbar>(Resource.Id.AppToolbar);
-            SetActionBar(toolbar);
+            SetActionBar(FindViewById<Toolbar>(Resource.Id.AppToolbar));
             ActionBar.Title = GetString(Resource.String.ApplicationName);
 
-            _projects = new List<Project>();
-            _adapter = new ProjectsAdapter(_projects);
-            _adapter.ItemClicked += OnProjectItemClicked;
+            _projectsDataSource = new List<Project>();
+            _projectsAdapter = new ProjectsAdapter(_projectsDataSource);
+            _projectsAdapter.ItemClicked += OnProjectItemClicked;
 
+            _progressBar = FindViewById<ProgressBar>(Resource.Id.Progressbar);
             var projectsRecycleView = FindViewById<RecyclerView>(Resource.Id.ProjectsRecyclerView);
             projectsRecycleView.SetLayoutManager(new LinearLayoutManager(this));
-            projectsRecycleView.SetAdapter(_adapter);
+            projectsRecycleView.SetAdapter(_projectsAdapter);
 
             await LoadProjectsAsync();
         }
@@ -69,44 +71,46 @@ namespace HyprsoftProjectsAndroidApp
 
         private async Task LoadProjectsAsync()
         {
-            var progress = FindViewById<ProgressBar>(Resource.Id.Progressbar);
+            if (_isLoading) return;
+
             try
             {
-                _projects.Clear();
-                _adapter.NotifyDataSetChanged();
+                _isLoading = true;
+                _projectsDataSource.Clear();
+                _projectsAdapter.NotifyDataSetChanged();
 
-                progress.Visibility = ViewStates.Visible;
+                _progressBar.Visibility = ViewStates.Visible;
 
                 var authContext = new AuthenticationContext(Constants.HyprsoftAzureActiveDirectoryUrl);
                 var clientCredentials = new ClientCredential(Constants.MobileServiceClientId, Constants.MobileServiceClientSecret);
                 var authResult = await authContext.AcquireTokenAsync(Constants.MobileServiceUrl, clientCredentials);
 
-                _client?.Dispose();
-                _client = new MobileServiceClient(Constants.MobileServiceUrl);
-                await _client.LoginAsync(MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory, new JObject(new JProperty("access_token", authResult.AccessToken)));
+                _mobileServiceClient?.Dispose();
+                _mobileServiceClient = new MobileServiceClient(Constants.MobileServiceUrl);
+                await _mobileServiceClient.LoginAsync(MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory, new JObject(new JProperty("access_token", authResult.AccessToken)));
 
-                var table = _client.GetTable<Project>();
-                _projects.AddRange(await table.OrderBy(p => p.CreatedAt).ToListAsync());
+                var table = _mobileServiceClient.GetTable<Project>();
+                _projectsDataSource.AddRange(await table.OrderBy(p => p.CreatedAt).ToListAsync());
 
                 var hubConnection = new HubConnection(Constants.MobileServiceUrl);
-                hubConnection.Headers.Add("X-ZUMO-AUTH", _client.CurrentUser.MobileServiceAuthenticationToken);
+                hubConnection.Headers.Add("X-ZUMO-AUTH", _mobileServiceClient.CurrentUser.MobileServiceAuthenticationToken);
                 _hubProxy = hubConnection.CreateHubProxy("ProjectsHub");
                 _hubProxy.On<Project>("projectAdded", (project) => RunOnUiThread(() =>
                 {
-                    _projects.Add(project);
-                    _adapter.NotifyDataSetChanged();
+                    _projectsDataSource.Add(project);
+                    _projectsAdapter.NotifyDataSetChanged();
                 }));
                 _hubProxy.On<string>("projectRemoved", (id) => RunOnUiThread(() =>
                 {
-                    var project = _projects.SingleOrDefault(p => p.Id == id);
+                    var project = _projectsDataSource.SingleOrDefault(p => p.Id == id);
                     if (project != null)
                     {
-                        _projects.Remove(project);
-                        _adapter.NotifyDataSetChanged();
+                        _projectsDataSource.Remove(project);
+                        _projectsAdapter.NotifyDataSetChanged();
                     }
                 }));
                 await hubConnection.Start();
-                _adapter.NotifyDataSetChanged();
+                _projectsAdapter.NotifyDataSetChanged();
             }
             catch (Exception ex)
             {
@@ -114,7 +118,8 @@ namespace HyprsoftProjectsAndroidApp
             }
             finally
             {
-                progress.Visibility = ViewStates.Gone;
+                _progressBar.Visibility = ViewStates.Gone;
+                _isLoading = false;
             }
         }
 
@@ -122,12 +127,12 @@ namespace HyprsoftProjectsAndroidApp
         {
             try
             {
-                var intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(_projects[position].LinkUri));
+                var intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(_projectsDataSource[position].LinkUri));
                 StartActivity(intent);
             }
             catch (Exception ex)
             {
-                Toast.MakeText(this, $"Unable to launch the '{_projects[position].LinkUri}' URI: {ex.Message}", ToastLength.Long).Show();
+                Toast.MakeText(this, $"Unable to launch the '{_projectsDataSource[position].LinkUri}' URI: {ex.Message}", ToastLength.Long).Show();
             }
         }
 
