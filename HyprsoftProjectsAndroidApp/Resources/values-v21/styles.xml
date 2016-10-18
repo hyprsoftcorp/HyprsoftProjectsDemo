@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+  <style name="Hyprsoft.Android.Theme" parent="android:Theme.Material.Light.DarkActionBar">
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowActionBar">false</item>
+    
+    <item name="android:colorPrimary">@color/HyprsoftBlue</item>
+    <item name="android:colorPrimaryDark">@color/HyprsoftBlack</item>
+    <item name="android:colorAccent">@color/HyprsoftSilver</item>
+    <item name="android:windowBackground">@color/HyprsoftWhite</item>
+    <item name="android:textColorPrimary">@color/HyprsoftWhite</item>
+    <item name="android:textColorSecondary">@color/HyprsoftWhite</item>
+    <item name="android:statusBarColor">@color/HyprsoftBlack</item>
+    <item name="android:navigationBarColor">@color/HyprsoftBlack</item>
+  </style>
+</resources>
