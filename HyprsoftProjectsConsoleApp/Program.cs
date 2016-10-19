@@ -65,14 +65,15 @@ namespace HyprsoftProjectsConsoleApp
                     try
                     {
                         var table = client.GetTable<Project>();
-                        await table.InsertAsync(new Project
+                        var project = new Project
                         {
                             Title = command.GetParameter(TitleParameterName).Value,
                             Description = command.GetParameter(DescriptionParameterName).Value,
                             ImageUri = command.GetParameter(ImageParameterName).Value,
                             LinkUri = command.GetParameter(LinkParameterName).Value
-                        });
-                        Console.WriteLine($"Project '{command.GetParameter(TitleParameterName).Value}' was successfully added.");
+                        };
+                        await table.InsertAsync(project);
+                        Console.WriteLine($"Project '{command.GetParameter(TitleParameterName).Value}' with Id '{project.Id}' was successfully added.");
                     }
                     catch (Exception ex)
                     {
