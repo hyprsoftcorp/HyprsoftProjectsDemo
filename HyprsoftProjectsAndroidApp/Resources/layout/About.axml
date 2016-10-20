@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="50dp"
+    android:gravity="center">
+
+  <ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/icon_blue"
+    android:layout_gravity="center" />
+
+  <TextView
+    android:text="@string/ApplicationName"
+    android:textAppearance="?android:attr/textAppearanceMedium"
+    android:fontFamily="sans-serif-light"
+    android:textColor="#000000"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center" />
+
+  <TextView
+    android:text="@string/Copyright"
+    android:textSize="12sp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center" />
+
+  <TextView
+    android:id="@+id/AppVersion"
+    android:text="Version 1.0"
+    android:textSize="10sp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center" />
+
+</LinearLayout>

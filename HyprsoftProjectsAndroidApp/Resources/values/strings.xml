@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="ApplicationName">Hyprsoft Projects</string>
+  <string name="ApplicationName">Hyprsoft Projects</string>
+  <string name="Copyright">Copyright © 2016 by Hyprsoft Corporation.  All rights reserved.</string>
+  <string name="MenuRefresh">Refresh</string>
+  <string name="MenuAbout">About</string>
+  <string name="AppVersion">Version</string>
 </resources>

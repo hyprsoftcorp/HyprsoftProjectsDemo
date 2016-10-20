@@ -11,6 +11,7 @@ This repository demonstrates managing and displaying recent web projects complet
 
 ### Native Android App
 ![Native Android App](https://cdn.rawgit.com/hyprsoftcorp/HyprsoftProjectsDemo/master/Images/android.jpg "Native Android App")
+![Native Android App](https://cdn.rawgit.com/hyprsoftcorp/HyprsoftProjectsDemo/master/Images/android_about.jpg "Native Android App")
 
 ### Windows Console App
 ![Windows Console App](https://cdn.rawgit.com/hyprsoftcorp/HyprsoftProjectsDemo/master/Images/console.jpg "Windows Console App")

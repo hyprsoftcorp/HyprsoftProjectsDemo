@@ -15,10 +15,11 @@ using Android.Support.V7.Widget;
 using Android.Widget;
 using Android.Views;
 using Android.Content;
+using Android.Content.PM;
 
 namespace HyprsoftProjectsAndroidApp
 {
-    [Activity(Label = "Hyprsoft Projects", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Hyprsoft Projects", MainLauncher = true, Icon = "@drawable/icon", ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
     public class MainActivity : Activity
     {
         #region Fields
@@ -40,7 +41,9 @@ namespace HyprsoftProjectsAndroidApp
 
             SetContentView(Resource.Layout.Main);
 
-            SetActionBar(FindViewById<Toolbar>(Resource.Id.AppToolbar));
+            var toolbar = FindViewById<Toolbar>(Resource.Id.AppToolbar);
+            toolbar.SetNavigationIcon(Resource.Drawable.icon);
+            SetActionBar(toolbar);
             ActionBar.Title = GetString(Resource.String.ApplicationName);
 
             _projectsDataSource = new List<Project>();
@@ -63,9 +66,30 @@ namespace HyprsoftProjectsAndroidApp
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
+            switch (item.ItemId)
+            {
+                case Resource.Id.menu_refresh:
 #pragma warning disable CS4014
-            LoadProjectsAsync();    // Fire and forget
+                    LoadProjectsAsync();    // Fire and forget
 #pragma warning restore CS4014
+                    break;
+                case Resource.Id.menu_about:
+                    var alert = new AlertDialog.Builder(this);
+                    var layout = LayoutInflater.Inflate(Resource.Layout.About, null);
+                    alert.SetView(layout);
+                    var version = "n/a";
+                    try
+                    {
+                        version = PackageManager.GetPackageInfo(PackageName, 0).VersionName;
+                    }
+                    catch (PackageManager.NameNotFoundException)
+                    {
+                    }
+                    ((TextView)layout.FindViewById(Resource.Id.AppVersion)).Text = $"{GetString(Resource.String.AppVersion)}: {version}";
+                    alert.Create().Show();
+                    break;
+            }
+
             return base.OnOptionsItemSelected(item);
         }
 

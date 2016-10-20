@@ -164,10 +164,16 @@ namespace HyprsoftProjectsAndroidApp
 			public const int ic_autorenew_white_24dp = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int icon = 2130837505;
+			public const int ic_info_white_24dp = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int placeholder = 2130837506;
+			public const int icon = 2130837506;
+			
+			// aapt resource value: 0x7f020003
+			public const int icon_blue = 2130837507;
+			
+			// aapt resource value: 0x7f020004
+			public const int placeholder = 2130837508;
 			
 			static Drawable()
 			{
@@ -182,32 +188,38 @@ namespace HyprsoftProjectsAndroidApp
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050001
-			public const int AppToolbar = 2131034113;
-			
 			// aapt resource value: 0x7f050002
-			public const int Progressbar = 2131034114;
+			public const int AppToolbar = 2131034114;
 			
-			// aapt resource value: 0x7f050006
-			public const int ProjectDescTextView = 2131034118;
-			
-			// aapt resource value: 0x7f050004
-			public const int ProjectImageImageView = 2131034116;
-			
-			// aapt resource value: 0x7f050005
-			public const int ProjectTitleTextView = 2131034117;
+			// aapt resource value: 0x7f050001
+			public const int AppVersion = 2131034113;
 			
 			// aapt resource value: 0x7f050003
-			public const int ProjectsRecyclerView = 2131034115;
+			public const int Progressbar = 2131034115;
 			
 			// aapt resource value: 0x7f050007
-			public const int agentWebView = 2131034119;
+			public const int ProjectDescTextView = 2131034119;
+			
+			// aapt resource value: 0x7f050005
+			public const int ProjectImageImageView = 2131034117;
+			
+			// aapt resource value: 0x7f050006
+			public const int ProjectTitleTextView = 2131034118;
+			
+			// aapt resource value: 0x7f050004
+			public const int ProjectsRecyclerView = 2131034116;
+			
+			// aapt resource value: 0x7f050008
+			public const int agentWebView = 2131034120;
 			
 			// aapt resource value: 0x7f050000
 			public const int item_touch_helper_previous_elevation = 2131034112;
 			
-			// aapt resource value: 0x7f050008
-			public const int menu_refresh = 2131034120;
+			// aapt resource value: 0x7f05000a
+			public const int menu_about = 2131034122;
+			
+			// aapt resource value: 0x7f050009
+			public const int menu_refresh = 2131034121;
 			
 			static Id()
 			{
@@ -223,13 +235,16 @@ namespace HyprsoftProjectsAndroidApp
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int Main = 2130903040;
+			public const int About = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int ProjectCardView = 2130903041;
+			public const int Main = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int WebAuthenticationBroker = 2130903042;
+			public const int ProjectCardView = 2130903042;
+			
+			// aapt resource value: 0x7f030003
+			public const int WebAuthenticationBroker = 2130903043;
 			
 			static Layout()
 			{
@@ -260,8 +275,20 @@ namespace HyprsoftProjectsAndroidApp
 		public partial class String
 		{
 			
+			// aapt resource value: 0x7f080004
+			public const int AppVersion = 2131230724;
+			
 			// aapt resource value: 0x7f080000
 			public const int ApplicationName = 2131230720;
+			
+			// aapt resource value: 0x7f080001
+			public const int Copyright = 2131230721;
+			
+			// aapt resource value: 0x7f080003
+			public const int MenuAbout = 2131230723;
+			
+			// aapt resource value: 0x7f080002
+			public const int MenuRefresh = 2131230722;
 			
 			static String()
 			{
