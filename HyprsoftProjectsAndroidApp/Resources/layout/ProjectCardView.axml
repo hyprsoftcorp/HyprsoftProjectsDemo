@@ -20,12 +20,14 @@
       <ImageView
           android:layout_width="105dp"
           android:layout_height="75dp"
+          android:src="@drawable/placeholder"
           android:id="@+id/ProjectImageImageView" />
 
       <LinearLayout
           android:layout_width="fill_parent"
           android:layout_height="fill_parent"
           android:orientation="vertical">
+        
         <TextView
             android:text="Title Text"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -36,6 +38,7 @@
             android:id="@+id/ProjectTitleTextView"
             android:paddingRight="10dp"
             android:paddingLeft="10dp" />
+        
         <TextView
             android:text="Description Text"
             android:textSize="12sp"
