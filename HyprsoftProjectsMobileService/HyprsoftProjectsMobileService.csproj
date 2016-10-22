@@ -220,6 +220,12 @@
     </Content>
     <None Include="Properties\PublishProfiles\hyprsoftprojectsmobileservice - Web Deploy.pubxml" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HyprsoftProjectsCommon\HyprsoftProjectsCommon.csproj">
+      <Project>{2b9a4523-8a8e-466f-ac30-94dc614a3b4b}</Project>
+      <Name>HyprsoftProjectsCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

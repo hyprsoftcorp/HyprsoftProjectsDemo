@@ -160,10 +160,17 @@ namespace HyprsoftProjectsConsoleApp
                 CantExecuteMessage = "Not connected.",
                 Execute = async command =>
                 {
-                    Console.WriteLine("\nId | Title");
-                    var table = client.GetTable<Project>();
-                    foreach (var item in await table.OrderBy(p => p.CreatedAt).ToCollectionAsync())
-                        Console.WriteLine($"{item.Id} | {item.Title}");
+                    try
+                    {
+                        Console.WriteLine("\nId | Title");
+                        var table = client.GetTable<Project>();
+                        foreach (var item in await table.OrderBy(p => p.CreatedAt).ToCollectionAsync())
+                            Console.WriteLine($"{item.Id} | {item.Title}");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
             });
 

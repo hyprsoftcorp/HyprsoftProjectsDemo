@@ -1,7 +1,6 @@
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
-using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Tables;
 using HyprsoftProjectsMobileService.DataObjects;
 
@@ -20,9 +19,7 @@ namespace HyprsoftProjectsMobileService.Models
         // service name, set by the 'MS_MobileServiceName' AppSettings in the local 
         // Web.config, is the same as the service name when hosted in Azure.
 
-        private const string connectionStringName = "Name=MS_TableConnectionString";
-
-        public MobileServiceContext() : base(connectionStringName)
+        public MobileServiceContext() : base(HyprsoftProjectsCommon.Constants.MobileServiceDatabaseConnectionString)
         {
         }
 
