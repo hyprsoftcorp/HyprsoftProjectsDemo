@@ -151,12 +151,12 @@ namespace HyprsoftProjectsAndroidApp
         {
             try
             {
-                var intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(_projectsDataSource[position].LinkUri));
+                var intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(_projectsDataSource[position].WebsiteUri));
                 StartActivity(intent);
             }
             catch (Exception ex)
             {
-                Toast.MakeText(this, $"Unable to launch the '{_projectsDataSource[position].LinkUri}' URI: {ex.Message}", ToastLength.Long).Show();
+                Toast.MakeText(this, $"Unable to launch the '{_projectsDataSource[position].WebsiteUri}' URI: {ex.Message}", ToastLength.Long).Show();
             }
         }
 

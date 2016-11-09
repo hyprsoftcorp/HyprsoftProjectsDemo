@@ -18,14 +18,14 @@ namespace HyprsoftProjectsConsoleApp
             const string RemoveProjectCommandName = "rem";
             const string ListProjectsCommandName = "list";
             const string ProjectDetailsCommandName = "det";
-            const string OpenLinkCommandName = "web";
+            const string OpenWebsiteCommandName = "web";
 
             // Parameters
             const string IdParameterName = "id";
             const string TitleParameterName = "title";
             const string DescriptionParameterName = "description";
             const string ImageParameterName = "image";
-            const string LinkParameterName = "link";
+            const string WebsiteParameterName = "website";
 
             var isAuthenticated = false;
             MobileServiceClient client = null;
@@ -57,7 +57,7 @@ namespace HyprsoftProjectsConsoleApp
             // Add Project
             manager.AddCommand(AddProjectCommandName, new Command
             {
-                Description = "Add a new user.",
+                Description = "Add a new project.",
                 CanExecute = () => isAuthenticated,
                 CantExecuteMessage = "Not connected.",
                 Execute = async command =>
@@ -70,7 +70,7 @@ namespace HyprsoftProjectsConsoleApp
                             Title = command.GetParameter(TitleParameterName).Value,
                             Description = command.GetParameter(DescriptionParameterName).Value,
                             ImageUri = command.GetParameter(ImageParameterName).Value,
-                            LinkUri = command.GetParameter(LinkParameterName).Value
+                            WebsiteUri = command.GetParameter(WebsiteParameterName).Value
                         };
                         await table.InsertAsync(project);
                         Console.WriteLine($"Project '{command.GetParameter(TitleParameterName).Value}' with Id '{project.Id}' was successfully added.");
@@ -95,8 +95,8 @@ namespace HyprsoftProjectsConsoleApp
             }).AddParameter(ImageParameterName, new Parameter
             {
                 Prompt = "Image Uri",
-                Description = "Image Uri of the new project.  ex. http://www.hyprsoft.com/images/image.jpg.",
-                CantValidateMessage = "Image Uri is invalid.  The Uri must be absolute with a scheme of http or https.  *.jpg and *.png only.",
+                Description = "Image Uri of the new project (JPG and PNG format only).  ex. http://www.hyprsoft.com/images/image.jpg.",
+                CantValidateMessage = "Image Uri is invalid.  The Uri must be absolute with a scheme of http or https.  JPG and PNG format only.",
                 Validate = value =>
                 {
                     Uri uri;
@@ -104,11 +104,11 @@ namespace HyprsoftProjectsConsoleApp
                         return Task.FromResult(uri.Scheme == "http" || uri.Scheme == "https" && (value.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) || value.EndsWith(".png", StringComparison.OrdinalIgnoreCase)));
                     return Task.FromResult(false);
                 }
-            }).AddParameter(LinkParameterName, new Parameter
+            }).AddParameter(WebsiteParameterName, new Parameter
             {
-                Prompt = "Link Uri",
-                Description = "LinkUri of the new project.  ex. http://www.google.com/",
-                CantValidateMessage = "Link Uri is invalid.    The Uri must be absolute with a scheme of http or https.",
+                Prompt = "Website Uri",
+                Description = "Website Uri of the new project.  ex. http://www.google.com/",
+                CantValidateMessage = "Website Uri is invalid.    The Uri must be absolute with a scheme of http or https.",
                 Validate = value =>
                 {
                     Uri uri;
@@ -192,7 +192,7 @@ namespace HyprsoftProjectsConsoleApp
                         Console.WriteLine($"Updated: {project.UpdatedAt}");
                         Console.WriteLine($"Created: {project.CreatedAt}");
                         Console.WriteLine($"Image: {project.ImageUri}");
-                        Console.WriteLine($"Link: {project.LinkUri}");
+                        Console.WriteLine($"Link: {project.WebsiteUri}");
                     }
                     catch (MobileServiceInvalidOperationException)
                     {
@@ -205,10 +205,10 @@ namespace HyprsoftProjectsConsoleApp
                 }
             }).AddParameter(IdParameterName, idParameter);
 
-            // Open Project Link
-            manager.AddCommand(OpenLinkCommandName, new Command
+            // Open Project Website
+            manager.AddCommand(OpenWebsiteCommandName, new Command
             {
-                Description = "Opens a project's link.",
+                Description = "Opens a project's website using the default browser.",
                 CanExecute = () => isAuthenticated,
                 CantExecuteMessage = "Not connected.",
                 Execute = async command =>
@@ -217,7 +217,7 @@ namespace HyprsoftProjectsConsoleApp
                     {
                         var table = client.GetTable<Project>();
                         var project = await table.LookupAsync(command.GetParameter(IdParameterName).Value);
-                        Process.Start(project.LinkUri);
+                        Process.Start(project.WebsiteUri);
                     }
                     catch (MobileServiceInvalidOperationException)
                     {

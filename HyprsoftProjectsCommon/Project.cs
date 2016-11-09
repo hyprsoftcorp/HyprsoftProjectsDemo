@@ -20,6 +20,6 @@ namespace HyprsoftProjectsCommon
 
         public string ImageUri { get; set; }
 
-        public string LinkUri { get; set; }
+        public string WebsiteUri { get; set; }
     }
 }

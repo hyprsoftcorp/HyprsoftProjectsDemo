@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Hyprsoft Projects CLI")]
-[assembly: AssemblyDescription("Hyprsoft Projects CLI")]
+[assembly: AssemblyTitle("Hyprsoft Projects Shell")]
+[assembly: AssemblyDescription("Hyprsoft Projects Shell")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Hyprsoft Corporation")]
-[assembly: AssemblyProduct("Hyprsoft Projects CLI")]
+[assembly: AssemblyProduct("Hyprsoft Projects Shell")]
 [assembly: AssemblyCopyright("Copyright © 2016 by Hyprsoft Corporation.  All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.3")]
-[assembly: AssemblyFileVersion("1.0.0.3")]
+[assembly: AssemblyVersion("1.0.0.4")]
+[assembly: AssemblyFileVersion("1.0.0.4")]
